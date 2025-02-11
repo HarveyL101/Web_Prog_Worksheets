@@ -65,9 +65,14 @@ function findElementsByQuery(query) {
 }
 
 function reverseList(query) {
-    const elem = document.querySelector(query);
+    let list = document.querySelector(query);
 
-    elem.reverse();
+    let items = Array.from(list.children);
+    items.reverse();
+
+    items.forEach(item => list.appendChild(item));
+
+    return list;
 }
 
 function mover(moveThis, appendToThis) {
@@ -88,6 +93,27 @@ function filler(list, candidates) {
 
 function dupe(selector) {
     let elem = document.querySelector(selector);
-    let x = elem.cloneNode(true);
-    elem.appendChild(x);
+    let clone = elem.cloneNode(true);
+    elem.parentNode.appendChild(clone);
+}
+
+function removeAll(selector) {
+    let elem = document.querySelectorAll(selector);
+    elem.forEach(item => {
+        item.remove();
+    });
+}
+
+function getUserData() {
+    let a = document.querySelector('#username').value;
+    let b = Number(document.querySelector('#speed').value);
+    let c = (document.querySelector('#student')).checked;
+
+    const obj = {
+        name: a,
+        speed: b,
+        student: c
+    };
+
+    return obj;
 }
