@@ -41,3 +41,18 @@ async function handleError(elem, url) {
     elem.textContent = "OH DEAR";
   }
 }
+
+async function drawBox(canvas, url) {
+  const ctx = canvas.getContext('2d');
+  let x, y;
+
+  setInterval(async () => {
+    const response = await fetch(url);
+    const content = await response.json();
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = 'black';
+    ctx.fillRect(content.x, content.y, 10, 10);
+  }, 1000);
+}
